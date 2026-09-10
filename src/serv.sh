@@ -10,3 +10,4 @@ SERVERS_CREATED_FILE='/data/servers.dat'
 folder_exists "/dev/shm/server_states/"
 file_exists "$SERVERS_CREATED_FILE"
 file_exists "$SERVERS_STATE_FILE"
+create_folder "$SERVERS_CREATED_FILE"
