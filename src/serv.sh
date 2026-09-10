@@ -10,3 +10,14 @@ if ! file_exists "$SERVERS_CREATED_FILE"; then
     create_file "$SERVERS_CREATED_FILE"
 fi
 
+# Argument management
+arg1="${1:-false}"
+arg2="${2:-false}"
+arg3="${3:-false}"
+
+# Setup logic
+if [ "$arg1" = "setup" ]; then
+    cd lib
+    ./stp.sh
+    exit 0
+fi
