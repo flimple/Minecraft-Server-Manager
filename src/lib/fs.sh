@@ -3,7 +3,6 @@ folder_exists() {
         echo "Error : arguments insufficient"
         exit 1
     fi
-    printf "$1"
     [ -d "$1" ] && echo "true" || echo "false"
 }
 
