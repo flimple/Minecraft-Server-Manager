@@ -6,3 +6,5 @@ source lib/init.sh
 # SERVERS_STATE_FOLDER='mc_server_states'
 
 # Argument control
+
+folder_exists "/dev/shm/"

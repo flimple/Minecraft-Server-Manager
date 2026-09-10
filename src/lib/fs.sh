@@ -8,5 +8,7 @@ folder_exists() {
 }
 
 file_exists() {
-
+    if [ ! -z "$1" ]; then
+        [ -f "$1" ] && echo "true" || echo "false"
+    fi
 }
