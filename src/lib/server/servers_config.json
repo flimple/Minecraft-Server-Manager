@@ -1,0 +1,17 @@
+{
+    "fabric" : {
+        "name" : "fabric",
+        "latest_version" : "26.2",
+        "dir" : "servers/fabric/"
+    },
+    "forge" : {
+        "name" : "forge",
+        "latest_version" : "26.2",
+        "dir" : "servers/forge/"
+    },
+    "vanilla" : {
+        "name" : "vanilla",
+        "latest_version" : "26.2",
+        "dir" : "servers/vanilla/"
+    }
+}

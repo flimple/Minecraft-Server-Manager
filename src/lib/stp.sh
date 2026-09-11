@@ -26,15 +26,21 @@ if ! [ "${#items[@]}" -eq 0 ]; then
     echo "The existing directories will be updated accordingly."
 fi
 
+# Fetching the config
+CONFIG_FILE='src/lib/server/servers_config.json'
+server_types=$(jq -r 'keys_unsorted[]' "$CONFIG_FILE")
+
 cd "$tar_path"
 
+# Main dirs init
 main_dirs=("backups" "servers" "temp" "data")
 for fd in "${main_dirs[@]}"; do
     [ ! -d "$fd" ] && mkdir "$fd"
 done
 
+# Server types init
+
 cd "servers"
-server_types=("vanilla" "fabric" "forge")
-for fd in "${server_types[@]}"; do
+for fd in "$server_types"; do
     [ ! -d "$fd" ] && mkdir "$fd"
 done
