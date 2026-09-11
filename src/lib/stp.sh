@@ -28,7 +28,8 @@ fi
 
 # Fetching the config
 CONFIG_FILE='src/lib/server/servers_config.json'
-server_types=$(jq -r 'keys_unsorted[]' "$CONFIG_FILE")
+server_types=$(jq -r 'keys[]' "$CONFIG_FILE")
+printf "$server_types"
 
 cd "$tar_path"
 
