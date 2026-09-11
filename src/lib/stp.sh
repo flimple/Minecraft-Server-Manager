@@ -14,7 +14,7 @@ fi
 shopt -s nullglob
 items=("$tar_path*")
 shopt -u nullglob
-printf "${#items[@]}"
+echo "${#items[@]}"
 if ! [ "${#items[@]}" -eq 0 ]; then
     read -p "The directory you provided is not empty, the script will proceed to update the necessary files and folders accordingly (y/n) [default : no] : " update_choice
     update_choice="${update_choice:-n}"
@@ -31,7 +31,7 @@ fi
 CONFIG_FILE='src/lib/server/servers_config.json'
 server_types=$(jq -r 'keys[]' "$CONFIG_FILE")
 echo "$server_types"
-
+exit 0
 cd "$tar_path"
 
 # Main dirs init
@@ -43,6 +43,7 @@ done
 # Server types init
 
 cd "servers"
-for fd in "${server_types[@]}"; do
+for fd in $server_types; do
+    echo "$fd"
     [ ! -d "$fd" ] && mkdir "$fd"
 done
