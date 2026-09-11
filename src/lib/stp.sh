@@ -1,6 +1,6 @@
 cd ../..
-printf "The current directory is : "
-pwd
+setup_path=$(pwd)
+printf "The current directory is : $setup_path\n"
 read -p "Enter target path [default: env/] [type cancel to cancel] : " tar_path
 tar_path="${tar_path:-env/}"
 if [ "$tar_path" = "cancel" ]; then
@@ -12,9 +12,10 @@ if [ ! -d "$tar_path" ]; then
 fi
 
 shopt -s nullglob
-items=("$tar_path*")
+items=("$tar_path"*)
+count="${#items[@]}"
 shopt -u nullglob
-if ! [ "${#items[@]}" -eq 0 ]; then
+if [ "$count" != "0" ]; then
     read -p "The directory you provided is not empty, the script will proceed to update the necessary files and folders accordingly (y/n) [default : no] : " update_choice
     update_choice="${update_choice:-n}"
     # To lower
@@ -26,15 +27,35 @@ if ! [ "${#items[@]}" -eq 0 ]; then
     echo "The existing directories will be updated accordingly."
 fi
 
+# Fetching the config
+CONFIG_FILE='src/lib/server/servers_config.json'
+server_types=$(jq -r 'keys[]' "$CONFIG_FILE")
 cd "$tar_path"
 
+# Main dirs init
 main_dirs=("backups" "servers" "temp" "data")
 for fd in "${main_dirs[@]}"; do
     [ ! -d "$fd" ] && mkdir "$fd"
 done
 
+# Server types init
+
 cd "servers"
-server_types=("vanilla" "fabric" "forge")
-for fd in "${server_types[@]}"; do
+for fd in $server_types; do
     [ ! -d "$fd" ] && mkdir "$fd"
 done
+
+
+echo "The setup was successfully completed."
+read -p "Do you wish to open the --Minecraft Servers Manager-- now ? (y/n) [default is no] : " open_confirmation
+open_confirmation="${open_confirmation:-n}"
+open_confirmation="${open_confirmation,,}"
+if [ "$open_confirmation" = "n" ]; then
+    echo "Exiting the -MSM- setup."
+    exit 0
+fi
+
+echo "Opening the --Minecraft Servers Manager--.."
+cd "$setup_path"
+cd "src"
+./serv.sh
