@@ -13,7 +13,7 @@ fi
 
 shopt -s nullglob
 items=("$tar_path*")
-count="${items[@]}"
+count="${#items[@]}"
 echo "$count"
 shopt -u nullglob
 if [ "$count" != "0" ]; then
