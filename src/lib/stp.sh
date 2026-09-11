@@ -12,7 +12,7 @@ if [ ! -d "$tar_path" ]; then
 fi
 
 shopt -s nullglob
-items=("$tar_path/*")
+items=("$tar_path*")
 count="${items[@]}"
 shopt -u nullglob
 if ! [ "$count" -eq 0 ]; then
