@@ -13,6 +13,7 @@ fi
 
 shopt -s nullglob
 items=("$tar_path*")
+echo "$items"
 shopt -u nullglob
 echo "${#items[@]}"
 if ! [ "${#items[@]}" -eq 0 ]; then
@@ -31,7 +32,6 @@ fi
 CONFIG_FILE='src/lib/server/servers_config.json'
 server_types=$(jq -r 'keys[]' "$CONFIG_FILE")
 echo "$server_types"
-exit 0
 cd "$tar_path"
 
 # Main dirs init
