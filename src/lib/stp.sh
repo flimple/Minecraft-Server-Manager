@@ -41,6 +41,6 @@ done
 # Server types init
 
 cd "servers"
-for fd in "$server_types"; do
+for fd in "${server_types[@]}"; do
     [ ! -d "$fd" ] && mkdir "$fd"
 done
