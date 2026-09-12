@@ -28,7 +28,7 @@ analyze_input() {
 
 # Needs to be below the nav_level var
 display_current_level() {
-    mapfile -t pre_load_actions < <(jq -r ".$navigation_level.button_pre_load_actions[]" "$CONFIG_FILE")
+    mapfile -t pre_load_actions < <(jq -r --arg lvl "$navigation_level" '.[$lvl].button_pre_load_actions[]' "$CONFIG_FILE")
     for action in "${pre_load_actions[@]}"; do
         $action
     done
