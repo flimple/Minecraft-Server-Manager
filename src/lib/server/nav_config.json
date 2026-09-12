@@ -1,0 +1,90 @@
+{
+    "0" : {
+        "name" : "Main Menu",
+        "buttons" : {
+            "menu" : {
+                "display" : "0. menu",
+                "name" : "Menu button",
+                "description" : "Reveal the main menu.",
+                "abrv" : [ "m", "0" ]
+            },
+            "servers" : {
+                "display" : "1. servers",
+                "name" : "Servers button",
+                "description" : "Go to the servers management tab.",
+                "abrv" : [ "s", "1" ]
+            },
+            "backups" : {
+                "display" : "2. backups",
+                "name" : "Backups button",
+                "description" : "Access the available backups.",
+                "abrv" : [ "b", "2" ]
+            },
+            "options" : {
+                "display" : "3. options",
+                "name" : "Options button",
+                "description" : "Change options about the app appearance or functionalities.",
+                "abrv" : [ "op", "opt", "3" ]
+            },
+            "exit" : {
+                "display" : "4. exit",
+                "name" : "Servers button",
+                "description" : "Go to the servers management tab.",
+                "abrv" : [ "ex", "cancel", "4" ]
+            },
+            "refresh" : {
+                "display" : "5. refresh",
+                "name" : "Refresh button",
+                "description" : "Refresh the current tab.",
+                "abrv" : [ "r", "5" ]
+            }
+        },
+        "button_pre_load_actions" : [ "display_title" ],
+        "button_post_load_actions" : []
+    },
+    "1" : {
+        "name" : "Servers management",
+        "buttons" : {
+            "back" : {
+                "display" : "0. back",
+                "name" : "Go back button",
+                "description" : "Go back to the main menu.",
+                "abrv" : [ "b", "0" ]
+            }
+        },
+        "button_pre_load_actions" : [],
+        "button_post_load_actions" : []
+    },
+    "2" : {
+        "name" : "Backups display",
+        "buttons" : {
+            "back" : {
+                "display" : "0. back",
+                "name" : "Go back button",
+                "description" : "Go back to the main menu.",
+                "abrv" : [ "b", "0" ]
+            }
+        },
+        "button_pre_load_actions" : [],
+        "button_post_load_actions" : []
+    },
+    "3" : {
+        "name" : "Options management",
+        "buttons" : {
+            "back" : {
+                "display" : "0. back",
+                "name" : "Go back button",
+                "description" : "Go back to the main menu.",
+                "abrv" : [ "b", "0" ]
+            },
+            "desc" : {
+                "display" : "1. Toggle Descriptions",
+                "name" : "Descriptions button",
+                "description" : "Use this button to toggle descriptions.",
+                "abrv" : [ "d", "1" ]
+            }
+        },
+        "button_pre_load_actions" : [],
+        "button_post_load_actions" : []
+    }
+}
