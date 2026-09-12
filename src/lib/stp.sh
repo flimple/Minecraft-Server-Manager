@@ -46,10 +46,17 @@ for fd in $server_types; do
 done
 
 # Generating a file in the data folder to confirm the setup has been run.
+echo "Setting up app data and config files.."
 cd "$setup_path"
 cd "src/data/"
 touch "config.json"
 jq -n '{version: "0.0.1", setup: "true"}' > config.json
+
+# Updating dependencies
+echo "Updating libraries..."
+sudo apt update
+echo "Installing dependencies.."
+sudo apt install figlet
 
 echo "The setup was successfully completed."
 read -p "Do you wish to open the --Minecraft Servers Manager-- now ? (y/n) [default is no] : " open_confirmation

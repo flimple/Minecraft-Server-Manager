@@ -24,16 +24,28 @@ if [ "$arg1" = "setup" ]; then
     exit 0
 fi
 
-# Checking the setup has already been run.
-setup_check=$(jq -r '.setup' "data/config.json")
-if ! [ "$setup_check" = "true" ]; then
-    printf "There seems to be an issue with the config.\nRunning the setup is suggested.\n"
-    exit 0
+# Checking the setup and config have already been run.
+if [ ! -d "data/" ]; then
+    echo "The app data folder was not found. Please reinstall."
+    exit 1
+elif [ ! -f "data/config.json" ]; then
+    echo "The app config was not found. Please reinstall."
+    exit 1
+else
+    # If the path or file does exit, we check the contents.
+    if ! [ "$(jq -r '.setup' "data/config.json")" = "true" ]; then
+        printf "There seems to be an issue with the config.\nRunning the setup is suggested.\n"
+        exit 1
+    fi
 fi
 
 # Ui or quick commands exectuion check.
 if [ "$arg1" = "false" ]; then
+    # The app will take control of the terminal and how it looks
+    clear
     echo "Initializing the MSM view interface."
+    sleep 1
+    display_menu
     exit 0
 else
     echo "Argument oriented process."
