@@ -58,7 +58,7 @@ launch_navigation() {
     clear
 
     # Imo having the dict of nav commands be loaded only after the navigation is called is better
-    navigation_level=1
+    navigation_level=0
     nav_commands=( ["refresh"]="continue" ["exit"]=break ["servers"]="change_level 1" ["backups"]="change_level 2" ["options"]="change_level 3" ["menu"]="change_level 0" )
     declare -r nav_commands
     local input=""
@@ -68,6 +68,7 @@ launch_navigation() {
         read -p "Please enter a command [default : refresh] : " input
         input="${input:-refresh}"
         clear
+        analyze_input "$input"
         command=$(analyze_input "$input")
         $command
         sleep 1
