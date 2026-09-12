@@ -46,7 +46,7 @@ launch_navigation() {
 
     # Imo having the dict of nav commands be loaded only after the navigation is called is better
     navigation_level=0
-    nav_commands=( ["refresh"]="continue" ["exit"]="break" ["servers"]="change_level 1" ["backups"]="change_level 2" ["options"]="change_level 3" ["menu"]="change_level 0" )
+    nav_commands=( ["refresh"]="continue" ["exit"]=break ["servers"]="change_level 1" ["backups"]="change_level 2" ["options"]="change_level 3" ["menu"]="change_level 0" )
     declare -r nav_commands
     local input=""
 
