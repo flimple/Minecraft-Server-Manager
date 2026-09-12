@@ -41,6 +41,7 @@ fi
 if [ "$arg1" = "false" ]; then
     # The app will take control of the terminal and how it looks
     clear
+    source lib/ui.sh
     echo "Initializing the MSM view interface."
     sleep 2
     launch_navigation
