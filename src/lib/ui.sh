@@ -20,7 +20,7 @@ display_title() {
 
 
 declare -A nav_commands
-declare -i navigation_level=0
+declare -i navigation_level=1
 analyze_input() {
     local input="${1,,}"
     echo "${nav_commands["$input"]}"
