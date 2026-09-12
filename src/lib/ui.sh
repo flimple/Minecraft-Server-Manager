@@ -70,8 +70,8 @@ launch_navigation() {
         # clear
         echo "$input"
         sleep 2
-        analyze_input "$input"
         command=$(analyze_input "$input")
+        echo "$command"
         $command
         sleep 2
     done
