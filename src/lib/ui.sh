@@ -18,7 +18,7 @@ display_server_display() {
 
 
 launch_navigation() {
-    while 1; do
+    while true; do
         display_top
         clear
         read -r "Please enter a command [default : refresh] : " input
