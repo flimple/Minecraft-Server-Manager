@@ -18,13 +18,7 @@ display_title() {
     return 0
 }
 
-
-declare -A nav_commands
 declare -i navigation_level=0
-analyze_input() {
-    local input="${1,,}"
-    echo "${nav_commands["$input"]}"
-}
 
 # Needs to be below the nav_level var
 display_current_level() {
@@ -61,7 +55,7 @@ launch_navigation() {
 
     # Imo having the dict of nav commands be loaded only after the navigation is called is better
     navigation_level=0
-    nav_commands=( 
+    declare -A nav_commands=( 
         ["refresh"]=continue
         ["exit"]=break 
         ["servers"]="change_nav_level 1" 
@@ -76,11 +70,9 @@ launch_navigation() {
         display_current_level
         read -p "Please enter a command [default : refresh] : " input
         input="${input:-refresh}"
-        # clear
-        command=$(analyze_input "$input")
-        echo "$command"
+        clear
+        command="${nav_commands["$input"]}"
         $command
-        sleep 2
     done
     return 0
 }
