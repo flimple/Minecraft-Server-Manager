@@ -8,9 +8,6 @@ SERVERS_CREATED_FILE='data/servers.dat'
 if ! file_exists "$SERVERS_CREATED_FILE"; then
     create_folder "$SERVERS_LOCAL_DATA"
     create_file "$SERVERS_CREATED_FILE"
-    # Added so that the init will be clean without any interruptions
-    echo "Init"
-    exit 0
 fi
 
 # Argument management
