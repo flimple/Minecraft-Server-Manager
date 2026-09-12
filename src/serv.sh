@@ -28,12 +28,14 @@ fi
 setup_check=$(jq -r '.setup' "data/config.json")
 if ! [ "$setup_check" = "true" ]; then
     printf "There seems to be an issue with the config.\nRunning the setup is suggested.\n"
-    exit 1
+    exit 0
 fi
 
 # Ui or quick commands exectuion check.
 if [ "$arg1" = "false" ]; then
     echo "Initializing the MSM view interface."
+    exit 0
 else
-    
+    echo "Argument oriented process."
+    exit 0
 fi
