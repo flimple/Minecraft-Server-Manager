@@ -22,14 +22,27 @@ display_title() {
 declare -A nav_commands
 declare -i navigation_level=0
 analyze_input() {
-    local input="$1"
+    local input="${1,,}"
     echo "${nav_commands["$input"]}"
 }
 
 # Needs to be below the nav_level var
 display_current_level() {
+    # Preload actions
     mapfile -t pre_load_actions < <(jq -r --arg lvl "$navigation_level" '.[$lvl].button_pre_load_actions[]' "$CONFIG_FILE")
     for action in "${pre_load_actions[@]}"; do
+        $action
+    done
+
+    # Buttons display
+    mapfile -t buttons < <(jq -r --arg lvl "$navigation_level" '.[$lvl].buttons | keys[]' "$CONFIG_FILE")
+    for button in "${buttons[@]}"; do
+        echo "$(jq -r --arg lvl "$navigation_level" --arg btn "$button" '.[$lvl].buttons.[$btn]' "$CONFIG_FILE")"    
+    done
+
+    # Postload actions
+    mapfile -t post_load_actions < <(jq -r --arg lvl "$navigation_level" '.[$lvl].button_post_load_actions[]' "$CONFIG_FILE")
+    for action in "${post_load_actions[@]}"; do
         $action
     done
     return 0
