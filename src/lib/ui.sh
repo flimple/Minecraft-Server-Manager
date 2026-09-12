@@ -57,6 +57,7 @@ launch_navigation() {
         clear
         command=$(analyze_input "$input")
         $command
+        sleep 1
     done
     return 0
 }
