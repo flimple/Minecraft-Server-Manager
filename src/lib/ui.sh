@@ -67,11 +67,13 @@ launch_navigation() {
         display_current_level
         read -p "Please enter a command [default : refresh] : " input
         input="${input:-refresh}"
-        clear
+        # clear
+        echo "$input"
+        sleep 2
         analyze_input "$input"
         command=$(analyze_input "$input")
         $command
-        sleep 1
+        sleep 2
     done
     return 0
 }
