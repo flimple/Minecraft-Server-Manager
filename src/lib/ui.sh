@@ -34,7 +34,6 @@ declare -r nav_commands
 
 analyze_input() {
     input="$1"
-    echo "$input"
     echo "${nav_commands["$input"]}"
     return 0
 }
