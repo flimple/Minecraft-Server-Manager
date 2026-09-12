@@ -5,7 +5,6 @@ display_top() {
     figlet -f slant "MINECRAFT"
     figlet -f small "Server Management"
     echo "└────────────────────────────────────────────────────────┘"
-    sleep 1
     return 0
 }
 
@@ -18,6 +17,8 @@ display_server_display() {
 
 
 launch_navigation() {
+    # The first clear is for clearing the terminal completely before even starting the nav
+    clear
     while true; do
         display_top
         read -p "Please enter a command [default : refresh] : " input
