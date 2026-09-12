@@ -2,16 +2,19 @@
     "fabric" : {
         "name" : "fabric",
         "latest_version" : "26.2",
-        "dir" : "servers/fabric/"
+        "dir" : "servers/fabric/",
+        "loader" : "0.19.5"
     },
     "forge" : {
         "name" : "forge",
         "latest_version" : "26.2",
-        "dir" : "servers/forge/"
+        "dir" : "servers/forge/",
+        "loader" : "65.1.3"
     },
     "vanilla" : {
         "name" : "vanilla",
         "latest_version" : "26.2",
-        "dir" : "servers/vanilla/"
+        "dir" : "servers/vanilla/",
+        "loader" : ""
     }
 }
