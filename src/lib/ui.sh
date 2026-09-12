@@ -20,10 +20,9 @@ display_server_display() {
 launch_navigation() {
     while true; do
         display_top
-        clear
         read -p "Please enter a command [default : refresh] : " input
         input="${input:-refresh}"
-
+        clear
         if [[ $input == "refresh" ]]; then
             continue
         fi
