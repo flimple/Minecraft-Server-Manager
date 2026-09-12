@@ -13,7 +13,7 @@ display_server_display() {
 }
 
 display_menu_commands() {
-
+    return 0
 }
 
 declare -A nav_commands
