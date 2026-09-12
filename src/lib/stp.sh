@@ -45,6 +45,11 @@ for fd in $server_types; do
     [ ! -d "$fd" ] && mkdir "$fd"
 done
 
+# Generating a file in the data folder to confirm the setup has been run.
+cd "$setup_path"
+cd "src/data/"
+touch "config.json"
+jq -n '{version: "0.0.1", setup: "true"}' > config.json
 
 echo "The setup was successfully completed."
 read -p "Do you wish to open the --Minecraft Servers Manager-- now ? (y/n) [default is no] : " open_confirmation
@@ -56,6 +61,5 @@ if [ "$open_confirmation" = "n" ]; then
 fi
 
 echo "Opening the --Minecraft Servers Manager--.."
-cd "$setup_path"
-cd "src"
+cd ..
 ./serv.sh

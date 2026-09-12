@@ -21,3 +21,17 @@ if [ "$arg1" = "setup" ]; then
     ./stp.sh
     exit 0
 fi
+
+# Checking the setup has already been run.
+setup_check=$(jq -r '.setup' "data/config.json")
+if ! [ "$setup_check" = "true" ]; then
+    printf "There seems to be an issue with the config.\nRunning the setup is suggested.\n"
+    exit 1
+fi
+
+# Ui or quick commands exectuion check.
+if [ "$arg1" = "false" ]; then
+    echo "Initializing the MSM view interface."
+else
+    
+fi
