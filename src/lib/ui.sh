@@ -28,7 +28,7 @@ declare -A nav_commands=(
     ["backups"]="change_nav_level 2" 
     ["options"]="change_nav_level 3" 
     ["menu"]="change_nav_level 0" 
-    ["back"]=""
+    ["back"]="go_back_nav_level"
 )
 declare -r nav_commands
 
@@ -63,7 +63,15 @@ display_current_level() {
 
 change_nav_level() {
     local new_level="$1"
+    last_nav_level="$navigation_level"
     navigation_level="$new_level"
+    return 0
+}
+
+go_back_nav_level() {
+    local temp="$navigation_level"
+    navigation_level="$last_nav_level"
+    last_nav_level="$temp"
     return 0
 }
 
