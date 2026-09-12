@@ -21,7 +21,7 @@ launch_navigation() {
     while true; do
         display_top
         clear
-        read -r "Please enter a command [default : refresh] : " input
+        read -p "Please enter a command [default : refresh] : " input
         input="${input:-refresh}"
 
         if [[ $input == "refresh" ]]; then
