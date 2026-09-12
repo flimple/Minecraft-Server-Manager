@@ -37,7 +37,7 @@ display_current_level() {
     # Buttons display
     mapfile -t buttons < <(jq -r --arg lvl "$navigation_level" '.[$lvl].buttons | keys[]' "$CONFIG_FILE")
     for button in "${buttons[@]}"; do
-        echo "$(jq -r --arg lvl "$navigation_level" --arg btn "$button" '.[$lvl].buttons.[$btn]' "$CONFIG_FILE")"    
+        echo "$(jq -r --arg lvl "$navigation_level" --arg btn "$button" '.[$lvl].buttons.[$btn].display' "$CONFIG_FILE")"    
     done
 
     # Postload actions
