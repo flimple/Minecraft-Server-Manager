@@ -42,8 +42,8 @@ if [ "$arg1" = "false" ]; then
     # The app will take control of the terminal and how it looks
     clear
     echo "Initializing the MSM view interface."
-    sleep 1
-    display_menu
+    sleep 2
+    launch_navigation
     exit 0
 else
     echo "Argument oriented process."
