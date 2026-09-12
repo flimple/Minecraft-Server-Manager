@@ -28,6 +28,7 @@ analyze_input() {
 
 # Needs to be below the nav_level var
 display_current_level() {
+    display_title
     # Preload actions
     mapfile -t pre_load_actions < <(jq -r --arg lvl "$navigation_level" '.[$lvl].button_pre_load_actions[]' "$CONFIG_FILE")
     for action in "${pre_load_actions[@]}"; do
@@ -50,6 +51,7 @@ display_current_level() {
 
 change_nav_level() {
     local new_level="$1"
+    navigation_level="$new_level"
     return 0
 }
 
@@ -59,7 +61,14 @@ launch_navigation() {
 
     # Imo having the dict of nav commands be loaded only after the navigation is called is better
     navigation_level=0
-    nav_commands=( ["refresh"]="continue" ["exit"]=break ["servers"]="change_level 1" ["backups"]="change_level 2" ["options"]="change_level 3" ["menu"]="change_level 0" )
+    nav_commands=( 
+        ["refresh"]=continue
+        ["exit"]=break 
+        ["servers"]="change_nav_level 1" 
+        ["backups"]="change_nav_level 2" 
+        ["options"]="change_nav_level 3" 
+        ["menu"]="change_nav_level 0" 
+    )
     declare -r nav_commands
     local input=""
 
@@ -68,8 +77,6 @@ launch_navigation() {
         read -p "Please enter a command [default : refresh] : " input
         input="${input:-refresh}"
         # clear
-        echo "$input"
-        sleep 2
         command=$(analyze_input "$input")
         echo "$command"
         $command

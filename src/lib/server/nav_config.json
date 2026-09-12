@@ -39,7 +39,7 @@
                 "abrv" : [ "r", "5" ]
             }
         },
-        "button_pre_load_actions" : [ "display_title" ],
+        "button_pre_load_actions" : [],
         "button_post_load_actions" : []
     },
     "1" : {
