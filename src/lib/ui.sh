@@ -33,7 +33,7 @@ declare -A nav_commands=(
 declare -r nav_commands
 
 analyze_input() {
-    input="$1,,"
+    input="$1"
     echo "$input"
     echo "${nav_commands["$input"]}"
     return 0
@@ -82,8 +82,6 @@ launch_navigation() {
         read -p "Please enter a command [default : refresh] : " input
         input="${input:-refresh}"
         clear
-        analyze_input "$input"
-        sleep 5
         command=$(analyze_input "$input")
         $command
     done
