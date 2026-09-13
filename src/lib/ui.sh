@@ -117,14 +117,16 @@ display_server_creation() {
         fi
         
         if (( needs_help_choices )); then
-            echo "[ Listening to the following commands :    show_choices ]"
+            open_box
+            echo " Listening to the following commands :    show_choices  "
+            close_box
         fi
         read -p "$prompt" cr_input
         cr_input="${cr_input:-refresh}"
         # The clear is placed here so that the bugs or errors appear on the top of the ui
         clear
 
-        if [[ cr_input == "show_choices" ]] && (( needs_help_choices )); then
+        if [[ "$cr_input" == "show_choices" ]] && (( needs_help_choices )); then
             nano -v "$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].list_path' "$CR_CONFIG_FILE")"
             clear
             continue
