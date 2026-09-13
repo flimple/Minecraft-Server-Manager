@@ -1,5 +1,5 @@
 #!/bin/bash
-declare -i descriptions=1
+declare -i descriptions=0
 if [ ! -d "data/" ]; then
     create_folder "data/"
     echo 0 > "data/ui_desc.dat"
@@ -72,7 +72,7 @@ display_server_creation() {
     filled_data=()
 
     # This section is for when the user needs help filling choices and therefore needs a visual
-    declare -i needs_help_choices=1
+    declare -i needs_help_choices=0
     
     while true; do
         display_title "Servers Management"
@@ -157,7 +157,7 @@ display_server_creation() {
                         # The item is non existant
                         echo "$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].fill_ver_fail_msg' "$CR_CONFIG_FILE")"
                         # The help choices prompt only appears after a wrong input has been entered
-                        needs_help_choices=0
+                        needs_help_choices=1
                         continue
                     fi
                 fi
@@ -165,7 +165,7 @@ display_server_creation() {
                 # default to filling the array, only if the choice is wrong should we continue and input an error
                 filled_data+=("$cr_input")
                 # Since the input was correct and to not have to do more verifications for the next input we just disable help choices
-                needs_help_choices=1
+                needs_help_choices=0
             fi
         elif [ "$data_type" == "auto" ]; then
             # Placeholder to the automatic filling of data
