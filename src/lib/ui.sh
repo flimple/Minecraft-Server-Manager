@@ -141,7 +141,7 @@ display_server_creation() {
                     json_pathing=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].list_load_json_command' "$CR_CONFIG_FILE")
                     mapfile -t choices < <(jq -r "$json_pathing" "$list_path")
                     printf "$choices"
-                    if ! [[ " ${choices[@]} " != *" $cr_input "* ]]; then
+                    if [[ " ${choices[@]} " != *" $cr_input "* ]]; then
                         # The item is non existant
                         echo "$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].fill_ver_fail_msg' "$CR_CONFIG_FILE")"
                         continue
