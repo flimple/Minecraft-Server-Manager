@@ -102,7 +102,7 @@ display_server_creation() {
             # If the user accepts the creation
             # Server creation logic should link up with the main.sh
             # Relocating to menu
-            echo "Server creation logic not found. Canceling.."
+            echo "Server creation logic not found. Cancelling.."
             sleep 2
             go_back_nav_level
             last_nav_level=0
@@ -135,7 +135,17 @@ display_server_creation() {
             if [ "$fill_type" = "input" ]; then
                 fill_verif=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].fill_verification' "$CR_CONFIG_FILE")
                 
-                
+                if [ "$fill_verif" != "free" ]; then
+                    # Check if the input exists in the supposed list
+                    list_path=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].list_path' "$CR_CONFIG_FILE")
+                    json_pathing=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].list_load_json_command' "$CR_CONFIG_FILE")
+                    mapfile -t choices < <(jq -r "$json_pathing" "$list_path")
+                    if ! [[ " ${choices[@]} " ~= "$cr_input" ]]; then
+                        # The item is non existant
+                        echo "$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].fill_ver_fail_msg' "$CR_CONFIG_FILE")"
+                        continue
+                    fi
+                fi
 
                 # default to filling the array, only if the choice is wrong should we continue and input an error
                 filled_data+=("$cr_input")

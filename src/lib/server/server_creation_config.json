@@ -12,7 +12,9 @@
         "type" : "fill",
         "fill_type" : "input",
         "fill_verification" : "list",
-        "list_load_command" : "",
+        "list_load_json_command" : ".versions[]",
+        "list_path" : "lib/servers/types/vanilla_versions.json",
+        "fill_ver_fail_msg" : "The version you have entered is not a valid minecraft version. Please try again.",
         "prompt" : "Please input the server version [default: latest] : ",
         "default" : "latest"
     },
@@ -25,7 +27,9 @@
         "type" : "fill",
         "fill_type" : "input",
         "fill_verification" : "list",
-        "list_load_command" : "",
+        "list_load_json_command" : "keys_unsorted[]",
+        "list_path" : "lib/servers/servers_config.json",
+        "fill_ver_fail_msg" : "The loader or server type you have entered is not correct or not supported by the app. Please try again.",
         "prompt" : "Choose the server type [default: vanilla] : ",
         "default" : "vanilla"
     },
