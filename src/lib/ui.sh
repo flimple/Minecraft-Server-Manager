@@ -95,7 +95,7 @@ display_server_creation() {
             # If the user cancels the creation
             if [ "$confirmation_cr" != "y" ]; then
                 clear
-                echo "Server creation canceled. Returning.."
+                echo "Server creation cancelled. Returning.."
                 sleep 2
                 go_back_nav_level
                 last_nav_level=0

@@ -15,8 +15,8 @@
         "list_load_json_command" : ".versions[]",
         "list_path" : "lib/server/types/vanilla_versions.json",
         "fill_ver_fail_msg" : "The version you have entered is not a valid minecraft version. Please try again.",
-        "prompt" : "Please input the server version [default: latest] : ",
-        "default" : "latest"
+        "prompt" : "Please input the server version [default: latest = 26.2] : ",
+        "default" : "26.2"
     },
     "id" : {
         "display" : "Server ID : ",
