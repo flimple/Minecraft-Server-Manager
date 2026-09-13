@@ -177,6 +177,8 @@ display_server_creation() {
         (( cr_data_fill_level++ ))
     done
     
+    # Realistically should never reach this point.
+    echo "Error in the ui while loop."
     return 0
 }
 
