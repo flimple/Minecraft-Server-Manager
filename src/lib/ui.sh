@@ -70,6 +70,9 @@ display_server_creation() {
     mapfile -t fill_data_keys < <(jq -r  'keys_unsorted[]' "$CR_CONFIG_FILE")
     declare -i -r max_cr_data_fill_level="${#fill_data_keys[@]}"
     filled_data=()
+
+    # This section is for when the user needs help filling choices and therefore needs a visual
+    declare -i needs_help_choices=1
     
     while true; do
         display_title "Servers Management"
@@ -112,10 +115,20 @@ display_server_creation() {
             # Some data remain, fetch prompt
             prompt=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].prompt // "Press enter to continue."' "$CR_CONFIG_FILE")
         fi
+        
+        if (( needs_help_choices )); then
+            echo "[ Listening to the following commands :    show_choices ]"
+        fi
         read -p "$prompt" cr_input
         cr_input="${cr_input:-refresh}"
         # The clear is placed here so that the bugs or errors appear on the top of the ui
         clear
+
+        if [[ cr_input == "show_choices" ]] && (( needs_help_choices )); then
+            nano -v "$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].list_path' "$CR_CONFIG_FILE")"
+            clear
+            continue
+        fi
 
         
         data_type=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].type' "$CR_CONFIG_FILE")
@@ -143,12 +156,16 @@ display_server_creation() {
                     if [[ " ${choices[@]} " != *" $cr_input "* ]]; then
                         # The item is non existant
                         echo "$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].fill_ver_fail_msg' "$CR_CONFIG_FILE")"
+                        # The help choices prompt only appears after a wrong input has been entered
+                        needs_help_choices=0
                         continue
                     fi
                 fi
 
                 # default to filling the array, only if the choice is wrong should we continue and input an error
                 filled_data+=("$cr_input")
+                # Since the input was correct and to not have to do more verifications for the next input we just disable help choices
+                needs_help_choices=1
             fi
         elif [ "$data_type" == "auto" ]; then
             # Placeholder to the automatic filling of data
