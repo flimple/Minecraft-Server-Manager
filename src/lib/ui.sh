@@ -55,7 +55,15 @@ close_box() {
 declare -i navigation_level=0
 declare -i last_nav_level=0
 
+go_back_nav_level() {
+    local temp="$navigation_level"
+    navigation_level="$last_nav_level"
+    last_nav_level="$temp"
+    return 0
+}
+
 display_server_creation() {
+    clear
     last_nav_level="$navigation_level"
     navigation_level="-1"
     declare -i cr_data_fill_level=-1
@@ -75,10 +83,42 @@ display_server_creation() {
             printf "\n"
         done
         close_box
+        prompt=""
+        if (( cr_data_fill_level + 1 == max_cr_data_fill_level )); then
+            # We filled all data required
+            read -p "Please review the entered information and confirm the creation of the server (y/n) [default: no] : " confirmation_cr
+            confirmation_cr="${confirmation_cr:-n}"
+            confirmation_cr="${confirmation_cr,,}"
+            # If the user cancels the creation
+            if [ "$confirmation_cr" != "y" ]; then
+                clear
+                echo "Server creation canceled. Returning.."
+                sleep 1
+                go_back_nav_level
+                last_nav_level=0
+                return 0
+            fi
+            # If the user accepts the creation
+            # Server creation logic should link up with the main.sh
+            # Relocating to menu
+            echo "Server creation logic not found. Canceling.."
+            sleep 1
+            go_back_nav_level
+            last_nav_level=0
+            return 0
+        else
+            # Some data remain, fetch prompt
+            prompt=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].prompt // "Press enter to continue."' "$CR_CONFIG_FILE")
+        fi
         read -p "" cr_input
         cr_input="${cr_input:-refresh}"
+        [ "$cr_input" = "refresh" ] && continue
+
+        # The clear is placed here so that the bugs or errors appear on the top of the ui
+        clear
         filled_data+=("$cr_input")
         [ "$cr_input" != "refresh" ] && (( cr_data_fill_level++ ))
+        
     done
     
     return 0
@@ -139,13 +179,6 @@ change_nav_level() {
     local new_level="$1"
     last_nav_level="$navigation_level"
     navigation_level="$new_level"
-    return 0
-}
-
-go_back_nav_level() {
-    local temp="$navigation_level"
-    navigation_level="$last_nav_level"
-    last_nav_level="$temp"
     return 0
 }
 

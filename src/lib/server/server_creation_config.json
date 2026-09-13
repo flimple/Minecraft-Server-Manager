@@ -21,7 +21,7 @@
         "type" : "auto"
     },
     "loader" : {
-        "display" : "Server type",
+        "display" : "Server type : ",
         "type" : "fill",
         "fill_type" : "input",
         "fill_verification" : "list",
@@ -30,7 +30,7 @@
         "default" : "vanilla"
     },
     "loader_version" : {
-        "display" : "Loader Version",
+        "display" : "Loader Version : ",
         "type" : "auto"
     }
 }
