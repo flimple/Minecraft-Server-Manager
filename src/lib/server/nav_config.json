@@ -39,7 +39,7 @@
                 "abrv" : [ "r", "5" ]
             }
         },
-        "button_pre_load_actions" : [],
+        "button_pre_load_actions" : ["display_app_title"],
         "button_post_load_actions" : []
     },
     "1" : {
@@ -50,9 +50,33 @@
                 "name" : "Go back button",
                 "description" : "Go back to the main menu.",
                 "abrv" : [ "b", "0" ]
+            },
+            "create" : {
+                "display" : "1. create",
+                "name" : "Create server button",
+                "description" : "Create a new server.",
+                "abrv" : [ "c", "1" ]
+            },
+            "open" : {
+                "display" : "2. open",
+                "name" : "Open a server button",
+                "description" : "Open the interface to manage a server.",
+                "abrv" : [ "op", "2" ]
+            },
+            "delete" : {
+                "display" : "3. delete",
+                "name" : "Delete server button",
+                "description" : "Delete a server.",
+                "abrv" : [ "d", "3" ]
+            },
+            "stop-all" : {
+                "display" : "1. stop-all",
+                "name" : "Stop all servers button",
+                "description" : "Stop all the servers that are open.",
+                "abrv" : [ "stp-a", "4" ]
             }
         },
-        "button_pre_load_actions" : [],
+        "button_pre_load_actions" : ["display_sub_title"],
         "button_post_load_actions" : []
     },
     "2" : {
@@ -65,7 +89,7 @@
                 "abrv" : [ "b", "0" ]
             }
         },
-        "button_pre_load_actions" : [],
+        "button_pre_load_actions" : ["display_sub_title Backups"],
         "button_post_load_actions" : []
     },
     "3" : {
@@ -78,13 +102,13 @@
                 "abrv" : [ "b", "0" ]
             },
             "desc" : {
-                "display" : "1. Toggle Descriptions",
+                "display" : "1. descriptions",
                 "name" : "Descriptions button",
                 "description" : "Use this button to toggle descriptions.",
-                "abrv" : [ "d", "1" ]
+                "abrv" : [ "d", "1", "descriptions" ]
             }
         },
-        "button_pre_load_actions" : [],
+        "button_pre_load_actions" : ["display_sub_title Options"],
         "button_post_load_actions" : []
     }
 }

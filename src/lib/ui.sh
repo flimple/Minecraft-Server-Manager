@@ -1,19 +1,50 @@
 #!/bin/bash
-descriptions="false"
+declare -i descriptions=1
 if [ ! -d "data/" ]; then
     create_folder "data/"
-    echo "false" > "data/ui_desc.dat"
+    echo 0 > "data/ui_desc.dat"
 elif [ ! -f "data/ui_desc.dat" ]; then
-    echo "false" > "data/ui_desc.dat"
+    echo 1 > "data/ui_desc.dat"
 else
     descriptions=$(cat "data/ui_desc.dat")
 fi
 declare -r CONFIG_FILE="lib/server/nav_config.json"
+toggle_desc() {
+    descriptions=$(( ! descriptions ))
+    echo "$descriptions" > "data/ui_desc.dat"
+    return 0
+}
 
-display_title() {
+
+display_app_title() {
     echo "┌────────────────────────────────────────────────────────┐"
     figlet -f slant "MINECRAFT"
     figlet -f small "Server Management"
+    echo "└────────────────────────────────────────────────────────┘"
+    return 0
+}
+
+open_box(){
+    echo "┌────────────────────────────────────────────────────────┐"
+    return 0
+}
+
+display_title() {
+    local title="$1"
+    title="${1:-MINECRAFT}"
+    title="${1^^}"
+    figlet -f slant "$title"
+    return 0
+}
+
+display_sub_title(){
+    local sub="$1"
+    sub="${1:-Server Management}"
+    figlet -f small "$sub"
+    return 0
+}
+
+close_box() {
     echo "└────────────────────────────────────────────────────────┘"
     return 0
 }
@@ -28,7 +59,8 @@ declare -A nav_commands=(
     ["backups"]="change_nav_level 2" 
     ["options"]="change_nav_level 3" 
     ["menu"]="change_nav_level 0" 
-    ["back"]="go_back_nav_level"
+    ["back"]="go_back_nav_level" 
+    ["desc"]=toggle_desc
 )
 declare -r nav_commands
 
@@ -40,7 +72,6 @@ analyze_input() {
 
 # Needs to be below the nav_level var
 display_current_level() {
-    display_title
     # Preload actions
     mapfile -t pre_load_actions < <(jq -r --arg lvl "$navigation_level" '.[$lvl].button_pre_load_actions[]' "$CONFIG_FILE")
     for action in "${pre_load_actions[@]}"; do
@@ -78,8 +109,6 @@ go_back_nav_level() {
 launch_navigation() {
     # The first clear is for clearing the terminal completely before even starting the nav
     clear
-
-    # Imo having the dict of nav commands be loaded only after the navigation is called is better
     navigation_level=0
     
     local input=""
