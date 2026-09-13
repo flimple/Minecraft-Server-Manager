@@ -76,8 +76,8 @@
                 "abrv" : [ "stp-a", "4" ]
             }
         },
-        "button_pre_load_actions" : ["display_sub_title"],
-        "button_post_load_actions" : []
+        "button_pre_load_actions" : ["display_sub_title", "open_box"],
+        "button_post_load_actions" : ["close_box"]
     },
     "2" : {
         "name" : "Backups display",
@@ -89,8 +89,8 @@
                 "abrv" : [ "b", "0" ]
             }
         },
-        "button_pre_load_actions" : ["display_sub_title Backups"],
-        "button_post_load_actions" : []
+        "button_pre_load_actions" : ["display_sub_title Backups", "open_box"],
+        "button_post_load_actions" : ["close_box"]
     },
     "3" : {
         "name" : "Options management",
@@ -108,7 +108,7 @@
                 "abrv" : [ "d", "1", "descriptions" ]
             }
         },
-        "button_pre_load_actions" : ["display_sub_title Options"],
-        "button_post_load_actions" : []
+        "button_pre_load_actions" : ["display_sub_title Options", "open_box"],
+        "button_post_load_actions" : ["close_box"]
     }
 }
