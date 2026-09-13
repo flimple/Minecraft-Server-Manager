@@ -117,9 +117,19 @@ display_server_creation() {
         # The clear is placed here so that the bugs or errors appear on the top of the ui
         clear
 
-        # Verfication logic to match the input to the fillings
+        
         data_type=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].type' "$CR_CONFIG_FILE")
-        [[ "$cr_input" == "refresh" && "$data_type" != "auto" ]] && continue
+        # Default input logic
+        if [[ "$cr_input" == "refresh" && "$data_type" != "auto" ]]; then
+            default_val=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].default // "refresh"' "$CR_CONFIG_FILE")
+            if [ "$default_val" == "refresh" ]; then
+                continue
+            else
+                cr_input="$default_val"
+            fi
+        fi
+
+        # Verfication logic to match the input to the fillings
         if [ "$data_type" == "fill" ]; then
             fill_type=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].fill_type' "$CR_CONFIG_FILE")
             if [ "$fill_type" = "input" ]; then
