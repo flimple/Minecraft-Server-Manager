@@ -1,0 +1,36 @@
+{
+    "name" : {
+        "display" : "Server Name : ",
+        "type" : "fill",
+        "fill_type" : "input",
+        "fill_verification" : "free",
+        "prompt" : "Please input the server name [default: A Minecraft Server] : ",
+        "default" : "A Minecraft Server"
+    },
+    "version" : {
+        "display" : "Server Version : ",
+        "type" : "fill",
+        "fill_type" : "input",
+        "fill_verification" : "list",
+        "list_load_command" : "",
+        "prompt" : "Please input the server version [default: latest] : ",
+        "default" : "latest"
+    },
+    "id" : {
+        "display" : "Server ID : ",
+        "type" : "auto"
+    },
+    "loader" : {
+        "display" : "Server type",
+        "type" : "fill",
+        "fill_type" : "input",
+        "fill_verification" : "list",
+        "list_load_command" : "",
+        "prompt" : "Choose the server type [default: vanilla] : ",
+        "default" : "vanilla"
+    },
+    "loader_version" : {
+        "display" : "Loader Version",
+        "type" : "auto"
+    }
+}
