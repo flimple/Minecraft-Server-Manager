@@ -39,8 +39,8 @@
                 "abrv" : [ "r", "5" ]
             }
         },
-        "button_pre_load_actions" : ["display_app_title"],
-        "button_post_load_actions" : []
+        "button_pre_load_actions" : ["display_title -MSM-", "open_box"],
+        "button_post_load_actions" : ["close_box"]
     },
     "1" : {
         "name" : "Servers management",
