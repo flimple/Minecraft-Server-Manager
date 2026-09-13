@@ -83,7 +83,9 @@ display_current_level() {
     for button in "${buttons[@]}"; do
         printf "$(jq -r --arg lvl "$navigation_level" --arg btn "$button" '.[$lvl].buttons.[$btn].display' "$CONFIG_FILE")"
         if (( descriptions )); then
-            echo "---  $(jq -r --arg lvl "$navigation_level" --arg btn "$button" '.[$lvl].buttons.[$btn].description' "$CONFIG_FILE")"
+            echo "  -->  $(jq -r --arg lvl "$navigation_level" --arg btn "$button" '.[$lvl].buttons.[$btn].description' "$CONFIG_FILE")"
+        else
+            printf "\n"
         fi
     done
 
