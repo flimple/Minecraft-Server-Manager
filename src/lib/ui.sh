@@ -93,32 +93,49 @@ display_server_creation() {
             if [ "$confirmation_cr" != "y" ]; then
                 clear
                 echo "Server creation canceled. Returning.."
-                sleep 1
+                sleep 2
                 go_back_nav_level
                 last_nav_level=0
+                clear
                 return 0
             fi
             # If the user accepts the creation
             # Server creation logic should link up with the main.sh
             # Relocating to menu
             echo "Server creation logic not found. Canceling.."
-            sleep 1
+            sleep 2
             go_back_nav_level
             last_nav_level=0
+            clear
             return 0
         else
             # Some data remain, fetch prompt
             prompt=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].prompt // "Press enter to continue."' "$CR_CONFIG_FILE")
         fi
-        read -p "" cr_input
+        read -p "$prompt" cr_input
         cr_input="${cr_input:-refresh}"
-        [ "$cr_input" = "refresh" ] && continue
-
         # The clear is placed here so that the bugs or errors appear on the top of the ui
         clear
-        filled_data+=("$cr_input")
-        [ "$cr_input" != "refresh" ] && (( cr_data_fill_level++ ))
-        
+
+        # Verfication logic to match the input to the fillings
+        data_type=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].type' "$CR_CONFIG_FILE")
+        [ "$cr_input" = "refresh" && "$data_type" != "auto" ] && continue
+        if [ "$data_type" == "fill" ]; then
+            fill_type=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].fill_type' "$CR_CONFIG_FILE")
+            if [ "$fill_type" = "input" ]; then
+                fill_verif=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].fill_verification' "$CR_CONFIG_FILE")
+                
+                
+
+                # default to filling the array, only if the choice is wrong should we continue and input an error
+                filled_data+=("$cr_input")
+            fi
+        elif [ "$data_type" == "auto" ]; then
+            # Placeholder to the automatic filling of data
+            filled_data+=("-----")
+        fi
+
+        (( cr_data_fill_level++ ))
     done
     
     return 0
