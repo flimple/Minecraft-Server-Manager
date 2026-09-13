@@ -119,7 +119,7 @@ display_server_creation() {
 
         # Verfication logic to match the input to the fillings
         data_type=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].type' "$CR_CONFIG_FILE")
-        [ "$cr_input" = "refresh" && "$data_type" != "auto" ] && continue
+        [[ "$cr_input" == "refresh" && "$data_type" != "auto" ]] && continue
         if [ "$data_type" == "fill" ]; then
             fill_type=$(jq -r --arg key "${fill_data_keys[cr_data_fill_level+1]}" '.[$key].fill_type' "$CR_CONFIG_FILE")
             if [ "$fill_type" = "input" ]; then
