@@ -142,7 +142,7 @@ display_server_creation() {
             fi
         elif [ "$data_type" == "auto" ]; then
             # Placeholder to the automatic filling of data
-            filled_data+=("-----")
+            filled_data+=(" (AUTO FILLING) ")
         fi
 
         (( cr_data_fill_level++ ))
